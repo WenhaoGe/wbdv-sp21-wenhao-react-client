@@ -1,6 +1,21 @@
 import React from 'react'
+import CourseCard from "./course-card";
+import {Link} from "react-router-dom";
 
-export default class CourseGird extends React.Component {
+const CourseGrid = ({courses}) =>
+    <div>
+        <Link to="/course/table">
+            <i className="fas fa-list fa-2x float-right"></i>
+        </Link>
+        <h3>Course Grid {courses.length}</h3>
+        <div className="row">
+            {
+                courses.map(course =>
+                    <CourseCard course={course}/>
+                )
+            }
+        </div>
+    </div>
 
-}
+export default CourseGrid
 
