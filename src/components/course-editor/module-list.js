@@ -10,18 +10,25 @@ const ModuleList = (
         createModule,
         updateModule,
         deleteModule,
-        findModulesFourCourse
+        findModulesForCourse
     }) => {
     const {layout, courseId, moduleId} = useParams();
     useEffect(() => {
-        findModulesFourCourse(courseId)
+        findModulesForCourse(courseId)
     }, [])
     return (<div>
         <h2>Module List</h2>
+        <ul>
+            <li>
+                layout: {layout}
+            </li>
+            <li>courseId: {courseId}</li>
+            <li>moduleId: {moduleId}</li>
+        </ul>
         <ul className="list-group">
             {
                 modules.map(module =>
-                    <li>
+                    <li className="list-group-item">
                         <EditableItem
                             to={`/courses/${layout}/edit/${courseId}/modules/${module._id}`}
                             deleteItem={deleteModule}
@@ -47,25 +54,26 @@ const dtpm = (dispatch) => ({
             .then(module => dispatch({type: "CREATE_MODULE", module: module}))
     },
 
-    updateModule: (newModule) => {
-        moduleService.updateModule(newModule._id, newModule)
-            .then(status => dispatch({type: "UPDATE_MODULE", updateModule: newModule}))
+    updateModule: (newItem) => {
+        moduleService.updateModule(newItem._id, newItem)
+            .then(status => dispatch({type: "UPDATE_MODULE", updateModule: newItem}))
     },
 
-    deleteModule: (module_to_delete) => {
-        moduleService.deleteModule(module_to_delete._id)
-            .then(status => dispatch({type: "DELETE_MODULE", moduleToDelete: module_to_delete}))
+    deleteModule: (moduleToDelete) => {
+        moduleService.deleteModule(moduleToDelete._id)
+            .then(status => dispatch({type: "DELETE_MODULE", moduleToDelete: moduleToDelete}))
     },
 
-    findModulesForCourses: (courseId) => {
+    findModulesForCourse: (courseId) => {
         moduleService.findModulesForCourse(courseId)
             .then(modules => dispatch({
                 type: "FIND_MODULES_FOR_COURSES",
                 modules: modules
         }))
     }
-
 })
+
+export default connect(stpm, dtpm)(ModuleList)
 
 
 

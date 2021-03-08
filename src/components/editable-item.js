@@ -25,8 +25,9 @@ const EditableItem = (
             {
                 editing &&
                 <>
-                    <input onChange={(e) => setItemCache({...itemCache, title: e.target.value})}
-                    value={itemCache.title}/>
+                    <input
+                        onChange={(e) => setItemCache({...itemCache, title: e.target.value})}
+                        value={itemCache.title}/>
                     <i onClick={() => {
                         setEditing(false)
                         updateItem(itemCache)

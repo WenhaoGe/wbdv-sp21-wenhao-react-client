@@ -2,16 +2,13 @@ import React from 'react'
 
 import CourseTable from "./course-table";
 import CourseGrid from "./course-grid";
-import CourseEditor from "./course-editor/course-editor";
 import {Link, Route} from 'react-router-dom';
 import courseService, {findAllCourses, deleteCourse} from "../services/course-service";
 
 
 class CourseManager extends React.Component {
     state = {
-        courses: [],
-        qwe: 123,
-        sdf:456
+        courses: []
     }
 
     updateCourse = (course) => {
@@ -63,21 +60,24 @@ class CourseManager extends React.Component {
                 </Link>
                 <h2>Course Manager</h2>
                 <button onClick={this.addCourse}>Add Course</button>
-                <Route path="/courses/table">
+                <Route path="/courses/table" exact={true}>
                     <CourseTable
                         updateCourse={this.updateCourse}
                         deleteCourse={this.deleteCourse}
-                        courses={this.state.courses}
-                    />
+                        courses={this.state.courses}/>
                 </Route>
-                <Route path="/courses/grid">
+                <Route path="/courses/grid" exact={true}>
                     <CourseGrid
                         deleteCourse={this.deleteCourse}
                         courses={this.state.courses}/>
                 </Route>
-                <Route path="/courses/editor"
-                       render={(props) => <CourseEditor {...props}/>}>
-                </Route>
+                {/*<Route path={[*/}
+                {/*    "/courses/editor/:courseId",*/}
+                {/*    "/courses/editor/:courseId/:moduleId",*/}
+                {/*    "/courses/editor/:courseId/:moduleId/:lessonId"]}*/}
+                {/*       exact={true}*/}
+                {/*       render={(props) => <CourseEditor {...props}/>}>*/}
+                {/*</Route>*/}
             </div>
         )
     }

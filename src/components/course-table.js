@@ -19,6 +19,7 @@ export default class CourseTable extends React.Component {
                 </Link>
                 <h3>Course Table</h3>
                 <table className="table">
+                    <thead></thead>
                     <tbody>
                     {
                         this.props.courses.map((course, ndx) =>

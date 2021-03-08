@@ -25,14 +25,14 @@ const CourseRow = ({
             <td>
                 {
                     !editing &&
-                    <Link to="/courses/editor">{title}</Link>
+                    <Link to={`/courses/table/edit/${course._id}`}>{title}</Link>
                 }
                 {
                     editing &&
-                    <input onChange={(event) => setNewTitle(event.target.value)}
-                           value={newTitle}
-                           className="form-control"
-                    />
+                    <input
+                        className="form-control"
+                        onChange={(event) => setNewTitle(event.target.value)}
+                        value={newTitle}/>
                 }
             </td>
             <td>{owner}</td>

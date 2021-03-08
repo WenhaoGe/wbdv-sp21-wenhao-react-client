@@ -43,3 +43,4 @@ const CourseEditor = ({history, params}) => {
 }
 
 
+export default CourseEditor

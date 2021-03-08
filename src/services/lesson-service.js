@@ -6,7 +6,7 @@ const createLesson = (moduleId, lesson) =>
         method: 'POST',
         body: JSON.stringify(lesson),
         headers: {
-            'content-type': 'application.json'
+            'content-type': 'application/json'
         }
     }).then(response => response.json())
 

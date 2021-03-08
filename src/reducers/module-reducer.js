@@ -1,9 +1,5 @@
 const initialState = {
-    modules: [
-        {title: 'CS5500', _id: '222'},
-        {title: 'CS5500', _id: '111'},
-        {title: 'CS5610', _id: '333'},
-    ],
+    modules: [],
     ascd:111,
     cjdhcdc:56788
 }
@@ -28,7 +24,7 @@ const moduleReducer = (state = initialState, action) => {
             return {
                 ...state,
                 modules: state.modules.map(module => {
-                    if (module._id == action.updateModule._id) {
+                    if (module._id === action.updateModule._id) {
                         return action.updateModule
                     } else {
                         return module
@@ -50,4 +46,5 @@ const moduleReducer = (state = initialState, action) => {
             return state
     }
 }
+export default moduleReducer
 
