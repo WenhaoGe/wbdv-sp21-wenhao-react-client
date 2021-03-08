@@ -27,18 +27,22 @@ const LessonTabs = ({
     }, [moduleId])
     return (
         <div>
-            <h2>Lessons</h2>
+            <h2>Lessons {lessons.length}</h2>
             <ul>
                 <li>course ID: {courseId}</li>
                 <li>module ID: {moduleId}</li>
                 <li>Lesson ID: {lessonId}</li>
             </ul>
+
+            {
+                JSON.stringify(lessons)
+            }
             <ul className="nav nav-tabs">
                 {
                     lessons.map(lesson =>
                         <li className="nav-item">
                             <EditableItem
-                                to={`/courses/editor/${courseId}/${moduleId}/${lesson._id}`}
+                                // to={`/courses/editor/${courseId}/${moduleId}/${lesson._id}`}
                                 item={lesson}
                                 updateItem={updateLesson}
                                 deleteItem={deleteLesson}
