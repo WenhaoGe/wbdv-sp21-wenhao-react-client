@@ -34,9 +34,6 @@ const LessonTabs = ({
                 <li>Lesson ID: {lessonId}</li>
             </ul>
 
-            {
-                JSON.stringify(lessons)
-            }
             <ul className="nav nav-tabs">
                 {
                     lessons.map(lesson =>
@@ -71,7 +68,7 @@ const dtpm = (dispatch) => ({
         lessonService.findLessonsForModule(moduleId)
             .then(lessons => dispatch({
                 type: "FIND_LESSONS",
-                lessons: lessons
+                lesson: lessons
             }))
     },
 

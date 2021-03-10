@@ -14,6 +14,7 @@ const ModuleList = (
     }) => {
     const {layout, courseId, moduleId} = useParams();
     useEffect(() => {
+        console.log(courseId)
         findModulesForCourse(courseId)
     }, [])
     return (<div>
@@ -29,7 +30,7 @@ const ModuleList = (
         <ul className="list-group">
             {
                 modules.map(module =>
-                    <li className="list-group-item">
+                    <li className="list-group-item" key={module._id}>
                         <EditableItem
                             to={`/courses/${layout}/edit/${courseId}/modules/${module._id}`}
                             deleteItem={deleteModule}
@@ -68,7 +69,7 @@ const dtpm = (dispatch) => ({
     findModulesForCourse: (courseId) => {
         moduleService.findModulesForCourse(courseId)
             .then(modules => dispatch({
-                type: "FIND_MODULES_FOR_COURSES",
+                type: "FIND_MODULES_FOR_COURSE",
                 modules: modules
         }))
     }
