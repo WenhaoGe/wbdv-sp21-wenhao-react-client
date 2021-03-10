@@ -1,5 +1,4 @@
 import React from 'react'
-
 import CourseTable from "./course-table";
 import CourseGrid from "./course-grid";
 import {Link, Route} from 'react-router-dom';
