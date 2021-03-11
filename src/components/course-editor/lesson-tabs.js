@@ -27,6 +27,7 @@ const LessonTabs = ({
     }, [moduleId])
     return (
         <div>
+            <h3>{lessonId}, {moduleId}</h3>
             <h2>Lessons {lessons.length}</h2>
 
             <ul className="nav nav-tabs">

@@ -18,26 +18,26 @@ const TopicPills = ({
 
     const {layout, courseId, moduleId, lessonId, topicId} = useParams()
     useEffect(() => {
-        if (lessonId !== "undefined" && typeof lessonId !== "undefined") {
+        if (moduleId !== "undefined" && typeof moduleId !== "undefined" &&
+            lessonId !== "undefined" && typeof lessonId !== "undefined") {
             findTopicsForLesson(lessonId)
         }
     }, [lessonId])
     return (
         <div>
-            <h2>Topics {topics.length}</h2>
             <ul className="nav nav-pills">
                 {
                     topics.map(topic =>
                         <li className="nav nav-item">
                                 <EditableItem
                                     to={`/courses/editor/${courseId}/${moduleId}/${lessonId}/${topic._id}`}
-                                    // to={`/courses/${layout}/edit/${courseId}/modules/${moduleId}/lessons/${lessonId}/topics/${topicId}`}
                                     item={topic}
                                     updateItem={updateTopic}
                                     deleteItem={deleteTopic}/>
                         </li>)
                 }
                 <li>
+                    <h2>{lessonId}</h2>
                     <i onClick={() => createTopicsForLesson(lessonId)} className="fas fa-plus"></i>
                 </li>
             </ul>
@@ -63,7 +63,7 @@ const dtpm = (dispatch) => ({
         console.log("CREATE TOPICS FOR LESSON")
         console.log(lessonId)
         topicService.createTopic(lessonId, {title: "New Lesson"})
-            .then(topic => dispatch({type: "CREATE_TOPIC", topic}))
+            .then(topic => dispatch({type: "CREATE_TOPIC", topics: topic}))
     },
 
     updateTopic: (newItem) => {
