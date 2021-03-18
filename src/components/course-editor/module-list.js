@@ -14,12 +14,12 @@ const ModuleList = (
     }) => {
     const {layout, courseId, moduleId} = useParams();
     useEffect(() => {
-        console.log(courseId)
+        console.log("course ID: ", courseId)
+        console.log("module ID: ", moduleId)
         findModulesForCourse(courseId)
     }, [])
     return (<div>
         <h2>Module List</h2>
-
 
         <ul className="list-group">
             {

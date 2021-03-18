@@ -20,17 +20,21 @@ const TopicPills = ({
     useEffect(() => {
         if (moduleId !== "undefined" && typeof moduleId !== "undefined" &&
             lessonId !== "undefined" && typeof lessonId !== "undefined") {
+            console.log("lesson ID: ", lessonId)
             findTopicsForLesson(lessonId)
         }
     }, [lessonId])
+
     return (
+
         <div>
             <ul className="nav nav-pills">
                 {
                     topics.map(topic =>
-                        <li className="nav nav-item">
+                        <li className="nav nav-item" key={topic._id}>
                                 <EditableItem
-                                    to={`/courses/editor/${courseId}/${moduleId}/${lessonId}/${topic._id}`}
+                                    // to={`/courses/editor/${courseId}/${moduleId}/${lessonId}/${topic._id}`}
+                                    to={`/courses/editor/${courseId}/modules/${moduleId}/lessons/${lessonId}/topics/${topic._id}`}
                                     item={topic}
                                     updateItem={updateTopic}
                                     deleteItem={deleteTopic}/>
@@ -47,7 +51,9 @@ const TopicPills = ({
 }
 
 const stpm = (state) => ({
+
     topics: state.topicReducer.topics
+
 })
 
 const dtpm = (dispatch) => ({
