@@ -5,21 +5,18 @@ import {useParams} from 'react-router-dom'
 import lessonService from "../../services/lesson-service"
 
 const LessonTabs = ({
-    lessons = [
-        {_id: "123", title: "Lesson A"},
-        {_id: "222", title: "Lesson B"},
-        {_id: "333", title: "Lesson C"}
-    ],
+    lessons = [],
     findLessonsForModule,
     createLessonForModule,
     updateLesson,
     deleteLesson
   }) => {
-    const {courseId, moduleId, lessonId} = useParams()
+    const {layout, courseId, moduleId, lessonId} = useParams()
 
     // if moduleId is changed, trigger this useEffect
     useEffect(() => {
 
+        console.log("LOAD LESSONS FOR MODULE: " + moduleId)
         if (moduleId !== "undefined" && typeof moduleId !== "undefined") {
             findLessonsForModule(moduleId)
         }
@@ -27,16 +24,15 @@ const LessonTabs = ({
     }, [moduleId])
     return (
         <div>
-            <h3>{lessonId}, {moduleId}</h3>
-            <h2>Lessons {lessons.length}</h2>
 
-            <ul className="nav nav-tabs">
+            <h2>Lessons</h2>
+
+            <ul className="nav nav-pills">
                 {
                     lessons.map(lesson =>
                         <li className="nav-item" key={lesson._id}>
                             <EditableItem
-                                // to={`/courses/editor/${courseId}/${moduleId}/${lesson._id}`}
-                                to={`/courses/editor/${courseId}/modules/${moduleId}/lessons/${lesson._id}`}
+                                to={`/courses/${layout}/edit/${courseId}/modules/${moduleId}/lessons/${lesson._id}`}
                                 item={lesson}
                                 updateItem={updateLesson}
                                 deleteItem={deleteLesson}

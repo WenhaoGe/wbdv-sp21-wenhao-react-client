@@ -3,22 +3,49 @@ import {connect} from "react-redux"
 import HeadingWidget from "./heading-widget";
 import ParagraphWidget from "./paragraph-widget";
 import {useParams} from "react-router-dom"
-import widgetService, {createWidget, deleteWidget} from "../../services/widget-service"
+import widgetService from "../../services/widget-service"
 
 const WidgeList = ({
+    widgets = [],
     createWidget,
     deleteWidget,
     updateWidget,
+    findWidgetForTopic
    }) => {
 
     const {topicId} = useParams()
-    const [widgets, setWidgets] = useState([])
-    const [widget, setWidget] = useState({})
 
     useEffect(() => {
-        widgetService.findWidgetsForTopic(topicId)
-            .then(widgets => setWidget(widgets))
-    }, [topicId])
+        findWidgetForTopic(topicId)
+    }, [])
+
+    return (
+        <div>
+            <h2>
+                Widgets List
+            </h2>
+            <i onClick={createWidget} className="fas fa-plus float-right fa-2x"></i>
+            <ul className="list-group">
+                {
+                    widgets.map(_widget =>
+                        <li key={_widget.id} className="list-group-item">
+                            {
+                                _widget.type === "HEADING" &&
+                                <HeadingWidget
+                                    widget={_widget}
+                                />
+                            }
+                            {
+                                _widget.type === "PARAGRAPH" &&
+                                <ParagraphWidget
+                                />
+                            }
+                        </li>
+                    )
+                }
+            </ul>
+        </div>
+    )
 
 }
 
@@ -40,7 +67,13 @@ const dtpm = (dispatch) => ({
 
     updateWidget: (newItem) => {
         widgetService.updateWidget(newItem._id, newItem)
-            .then()
+            .then(status => dispatch({type: "UPDATE_WIDGET", updateWidget: newItem}))
+    },
+
+    findWidgetForTopic: (tid) => {
+        console.log("refresh the page")
+        widgetService.findWidgetsForTopic(tid)
+            .then(widget => dispatch({type: "FIND_ALL_WIDGETS_FOR_TOPIC", widgets: widget}))
     }
 })
 
