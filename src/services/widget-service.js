@@ -1,10 +1,10 @@
-const TOPICS_URL = "https://wbdv-generic-server.herokuapp.com/api/001300169/topics"
+const TOPICS_URL = "http://localhost:8080/api/topics"
 const WIDGETS_URL = "http://localhost:8080/api/widgets"
 
-export const createWidget = (tid, widget) =>
+export const createWidget = (tid) =>
     fetch(`${TOPICS_URL}/${tid}/widgets`, {
         method: "POST",
-        body: JSON.stringify(widget),
+        body: JSON.stringify({type: "HEADING", size: 2, text: "New Widget"}),
         headers: {
             'content-type': 'application/json'
         }
