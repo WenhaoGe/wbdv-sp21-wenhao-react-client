@@ -8,6 +8,7 @@ const widgetReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case "CREATE_WIDGET":
+            console.log("create widget in reducer")
             return {
                 ...state,
                 widgets: [
@@ -19,13 +20,13 @@ const widgetReducer = (state = initialState, action) => {
         case "DELETE_WIDGET":
             return {
                 ...state,
-                widgets: state.widgets.filter(w => w._id !== action.widgetToDelete._id)
+                widgets: state.widgets.filter(w => w.id !== action.widgetToDelete.id)
             }
         case "UPDATE_WIDGET":
             return {
                 ...state,
                 widgets: state.widgets.map(w => {
-                    if (w._id == action.updateWidget._id) {
+                    if (w.id == action.updateWidget.id) {
                         return action.updateWidget
                     } else {
                         return w

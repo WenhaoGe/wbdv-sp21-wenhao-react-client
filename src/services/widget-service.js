@@ -4,7 +4,7 @@ const WIDGETS_URL = "http://localhost:8080/api/widgets"
 export const createWidget = (tid) =>
     fetch(`${TOPICS_URL}/${tid}/widgets`, {
         method: "POST",
-        body: JSON.stringify({type: "HEADING", size: 2, text: "New Widget"}),
+        body: JSON.stringify({type: "HEADING", size: 1, text: "New Widget"}),
         headers: {
             'content-type': 'application/json'
         }

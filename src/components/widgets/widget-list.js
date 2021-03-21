@@ -17,27 +17,33 @@ const WidgeList = ({
 
     useEffect(() => {
         findWidgetForTopic(topicId)
-    }, [])
+    }, [topicId])
 
     return (
         <div>
+            <i onClick={() => createWidget(topicId)} className="fas fa-plus float-right fa-2x"></i>
             <h2>
                 Widgets List
             </h2>
-            <i onClick={createWidget} className="fas fa-plus float-right fa-2x"></i>
             <ul className="list-group">
                 {
                     widgets.map(_widget =>
+
                         <li key={_widget.id} className="list-group-item">
                             {
                                 _widget.type === "HEADING" &&
                                 <HeadingWidget
                                     widget={_widget}
+                                    deleteWidget={deleteWidget}
+                                    updateWidget={updateWidget}
                                 />
                             }
                             {
                                 _widget.type === "PARAGRAPH" &&
                                 <ParagraphWidget
+                                    widget={_widget}
+                                    deleteWidget={deleteWidget}
+                                    updateWidget={updateWidget}
                                 />
                             }
                         </li>
@@ -56,22 +62,24 @@ const stpm = (state) => ({
 const dtpm = (dispatch) => ({
 
     createWidget: (tid) => {
+
         widgetService.createWidget(tid)
             .then(widget => dispatch({type: "CREATE_WIDGET", widget: widget}))
     },
 
     deleteWidget: (widgetToDelete) => {
-        widgetService.deleteWidget(widgetToDelete._id)
+
+        widgetService.deleteWidget(widgetToDelete.id)
             .then(status => dispatch({type: "DELETE_WIDGET", widgetToDelete: widgetToDelete}))
     },
 
     updateWidget: (newItem) => {
-        widgetService.updateWidget(newItem._id, newItem)
+        widgetService.updateWidget(newItem.id, newItem)
             .then(status => dispatch({type: "UPDATE_WIDGET", updateWidget: newItem}))
     },
 
     findWidgetForTopic: (tid) => {
-        console.log("refresh the page")
+
         widgetService.findWidgetsForTopic(tid)
             .then(widget => dispatch({type: "FIND_ALL_WIDGETS_FOR_TOPIC", widgets: widget}))
     }
