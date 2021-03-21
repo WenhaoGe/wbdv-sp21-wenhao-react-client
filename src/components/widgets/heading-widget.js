@@ -34,10 +34,14 @@ const HeadingWidget = (
                         onChange={(e) => setItemCache(itemCache => ({...itemCache, title: e.target.value}))}
                         value={itemCache.title} className="form-control"/>
                     <select onChange={(e) => setItemCache(
-                        widget => ({...widget, size: parseInt(e.target.value)}))}
-                            value={widget.size} className="form-control">
-                        {/*<option value={"PARAGRAPH"}>PARAGRAPH</option>*/}
-                        {/*<option value={"HEADING"}>HEADING</option>*/}
+                        itemCache => ({...itemCache, type: e.target.value}))}
+                            value={itemCache.type} className="form-control">
+                        <option value={"PARAGRAPH"}>PARAGRAPH</option>
+                        <option value={"HEADING"}>HEADING</option>
+                    </select>
+                    <select onChange={(e) => setItemCache(
+                        itemCache => ({...itemCache, size: parseInt(e.target.value)}))}
+                            value={itemCache.size} className="form-control">
                         <option value={1}>Heading 1</option>
                         <option value={2}>Heading 2</option>
                         <option value={3}>Heading 3</option>
