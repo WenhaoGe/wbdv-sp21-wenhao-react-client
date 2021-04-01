@@ -20,7 +20,7 @@ const WidgeList = ({
     useEffect(() => {
         findWidgetForTopic(topicId)
     }, [topicId])
-
+    console.log(widgets)
     return (
         <div>
             <i onClick={() => createWidget(topicId)} className="fas fa-plus float-right fa-2x"></i>
@@ -29,6 +29,7 @@ const WidgeList = ({
             </h2>
             <ul className="list-group">
                 {
+
                     widgets.map(_widget =>
 
                         <li key={_widget.id} className="list-group-item">

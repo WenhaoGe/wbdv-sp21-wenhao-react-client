@@ -44,7 +44,12 @@ const ListWidget = (
                 editing &&
                 <div>
                     <i onClick={() => setEditing(false)} className="fas fa-edit float-right"></i>
-                    <input type="checkbox"/>
+                    <input type="checkbox"
+                           checked={itemCache.ordered}
+                            id = {widget.id}
+                            onChange={(e) => {
+                                updateWidget(itemCache)
+                            }}/>
                     Ordered
                     <br/>
                     List Items

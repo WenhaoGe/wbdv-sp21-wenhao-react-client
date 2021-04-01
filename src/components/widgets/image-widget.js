@@ -24,8 +24,8 @@ const ImageWidget = (
 
                     URL
                     <input
-                        onChange={(e) => setItemCache(itemCache => ({...itemCache, url: e.target.value}))}
-                        value={itemCache.url} className="form-control"/>
+                        onChange={(e) => setItemCache(itemCache => ({...itemCache, src: e.target.value}))}
+                        value={itemCache.src} className="form-control"/>
                     width
                     <input
                         onChange={(e) => setItemCache(itemCache => ({...itemCache, width: e.target.value}))}
@@ -39,7 +39,12 @@ const ImageWidget = (
 
             {
                 !editing &&
-                <i onClick={() => setEditing(true)} className="fas fa-edit"></i>
+                <div>
+                    <img width={itemCache.width} height={itemCache.height} src={itemCache.src}
+                          alt={itemCache.name}/>
+                    <i onClick={() => setEditing(true)} className="fas fa-edit"></i>
+                </div>
+
             }
         </div>
     )
