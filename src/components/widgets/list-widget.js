@@ -1,6 +1,14 @@
-import React from 'react'
+import React, {useState} from 'react'
 
-const ListWidget = ({widget, setWidget, editing}) => {
+const ListWidget = (
+    {
+        widget,
+        updateWidget,
+        deleteWidget
+    }) => {
+
+    const [editing, setEditing] = useState(false)
+    const [itemCache, setItemCache] = useState(widget)
 
     return (
         <div>
@@ -9,6 +17,7 @@ const ListWidget = ({widget, setWidget, editing}) => {
             {
                 !editing &&
                     <>
+                        <i onClick={() => setEditing(true)} className="fas fa-edit float-right"></i>
                         {
                             widget.ordered &&
                             <ol>
@@ -34,11 +43,16 @@ const ListWidget = ({widget, setWidget, editing}) => {
             {
                 editing &&
                 <div>
+                    <i onClick={() => setEditing(false)} className="fas fa-edit float-right"></i>
                     <input type="checkbox"/>
                     Ordered
                     <br/>
                     List Items
-                    <textarea rows={10} value={widget.text} className="form-control">
+
+                    <textarea rows={10}
+                        onChange={(e) => setItemCache(itemCache => ({...itemCache, text: e.target.value}))}
+                        value={itemCache.text}
+                        className="form-control">
 
                     </textarea>
                 </div>
