@@ -1,20 +1,20 @@
 import React, {useState, useEffect} from "react"
-
 import {useParams} from 'react-router-dom'
 import {connect} from "react-redux"
 import Question from "./questions/question";
 import questionService from "../../services/question-service"
 
-const Quiz = ({
-    questions = [],
-    findQuestionsForQuiz
-    }) => {
+const Quiz = () => {
 
     const {courseId, quizId} = useParams()
-    // const [questions, setQuestions] = useState([])
+    console.log("courseId", courseId)
+    console.log("quizId", quizId)
+
+    const [questions, setQuestions] = useState([])
     useEffect(() => {
-        findQuestionsForQuiz(quizId)
-    }, [quizId])
+        questionService.getQuestionsForQuiz(quizId)
+            .then(questions => setQuestions(questions))
+    }, [])
 
     return(
         <div>
@@ -28,19 +28,21 @@ const Quiz = ({
                 }
             </ul>
         </div>
-    )
+    );
 }
 
-const stpm = (state) => ({
-    questions: state.questionReducer.questions
-})
+export default Quiz;
 
-const dtpm = (dispatch) => ({
+// const stpm = (state) => ({
+//     questions: state.questionReducer.questions
+// })
+//
+// const dtpm = (dispatch) => ({
+//
+//     findQuestionsForQuiz: (quizId) => {
+//         questionService.getQuestionsForQuiz(quizId).then(question =>
+//                          dispatch({type: "FIND_ALL_QUESTIONS_FOR_QUIZ", questions: question}))
+//     }
+// })
 
-    findQuestionsForQuiz: (quizId) => {
-        questionService.getQuestionsForQuiz(quizId).then(question =>
-                         dispatch({type: "FIND_ALL_QUESTIONS_FOR_QUIZ", questions: question}))
-    }
-})
-
-export default connect(stpm, dtpm)(Quiz)
+// export default connect(stpm, dtpm)(Quiz)

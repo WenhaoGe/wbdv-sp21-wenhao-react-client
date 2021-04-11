@@ -19,8 +19,8 @@ const reducer = combineReducers({
     lessonReducer: lessonReducer,
     topicReducer: topicReducer,
     widgetReducer: widgetReducer,
-    questionReducer: questionReducer,
-    quizReducer: quizReducer
+    // questionReducer: questionReducer,
+    // quizReducer: quizReducer
 })
 
 const store = createStore(reducer)
