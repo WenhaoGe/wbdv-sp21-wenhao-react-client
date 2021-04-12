@@ -11,8 +11,8 @@ import moduleReducer from "../../reducers/module-reducer";
 import lessonReducer from "../../reducers/lesson-reducer";
 import topicReducer from "../../reducers/topic-reducer";
 import widgetReducer from "../../reducers/widget-reducer"
-import questionReducer from "../../reducers/question-reducer";
-import quizReducer from "../../reducers/quiz-reducer";
+// import questionReducer from "../../reducers/question-reducer";
+// import quizReducer from "../../reducers/quiz-reducer";
 
 const reducer = combineReducers({
     moduleReducer: moduleReducer,
