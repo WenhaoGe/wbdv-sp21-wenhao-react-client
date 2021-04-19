@@ -3,10 +3,12 @@ import {useParams} from 'react-router-dom'
 import {connect} from "react-redux"
 import Question from "./questions/question";
 import questionService from "../../services/question-service"
+import QuizzesService from "../../services/quizzes-service";
 
 const Quiz = () => {
 
     const {courseId, quizId} = useParams()
+    const [submitted, setSubmit] = useState(false)
     console.log("courseId", courseId)
     console.log("quizId", quizId)
 
@@ -24,9 +26,29 @@ const Quiz = () => {
                     questions.map(question =>
                     <li>
                         <Question question={question}/>
+                        {question.answer}
                     </li>)
                 }
+
             </ul>
+            <button onClick={() => {
+                QuizzesService.submitQuiz(quizId, questions)
+                setSubmit(true)
+            }}>
+                Submit
+            </button>
+            <br/>
+            <br/>
+            {
+                submitted &&
+                <div className="row">
+                    <h6 style={{ color: 'green' }}>Quiz is submitted</h6>
+                    <i className="fas fa-check"></i>
+                </div>
+            }
+
+            <br/>
+
         </div>
     );
 }

@@ -8,25 +8,27 @@ const MultipleChoiceQuestion = ({question}) => {
         <div>
             <h4>
                 {question.question}
-                {
-                    answer === question.correct &&
-                    <i className="fas fa-check"></i>
-                }
-                {
-                    answer !== question.correct &&
-                    <i className="fas fa-times"></i>
-                }
+                {/*{*/}
+                {/*    answer === question.correct &&*/}
+                {/*    <i className="fas fa-check"></i>*/}
+                {/*}*/}
+                {/*{*/}
+                {/*    answer !== question.correct &&*/}
+                {/*    <i className="fas fa-times"></i>*/}
+                {/*}*/}
             </h4>
 
-            <br/>
             {
-                question.choices.map((choice) => {
+                question.choice.map((each) => {
                     return(
                         <label className="form-control btn-link">
                             <input type="radio"
-                            onClick={() => setAnswer(choice)}
+                            onClick={() => {
+                                setAnswer(each)
+                                question.answer = each
+                            }}
                             name={question._id}/>
-                            {choice}
+                            {each}
                         </label>
 
                     )

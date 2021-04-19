@@ -8,34 +8,40 @@ const TrueFalseQuestion = ({question}) => {
             <h4>
                 {question.question}
 
-                {
-                    answer && question.correct === "true" &&
-                    <i className="fas fa-check"></i>
-                }
-                {
-                    !answer && question.correct === "false" &&
-                    <i className="fas fa-check"></i>
-                }
-                {
-                    !answer && question.correct === "true" &&
-                    <i className="fas fa-times"></i>
-                }
-                {
-                    answer && question.correct === "false" &&
-                    <i className="fas fa-times"></i>
-                }
+                {/*{*/}
+                {/*    answer && question.correct === "true" &&*/}
+                {/*    <i className="fas fa-check"></i>*/}
+                {/*}*/}
+                {/*{*/}
+                {/*    !answer && question.correct === "false" &&*/}
+                {/*    <i className="fas fa-check"></i>*/}
+                {/*}*/}
+                {/*{*/}
+                {/*    !answer && question.correct === "true" &&*/}
+                {/*    <i className="fas fa-times"></i>*/}
+                {/*}*/}
+                {/*{*/}
+                {/*    answer && question.correct === "false" &&*/}
+                {/*    <i className="fas fa-times"></i>*/}
+                {/*}*/}
 
             </h4>
             <br/>
             <label className="btn btn-primary">
                 <input type="radio"
-                onClick={() => setAnswer(true)}
+                onClick={() => {
+                    setAnswer(true)
+                    question.answer = "true"
+                }}
                 name={question._id}/>
                 True
             </label>
             <br/>
             <label className="btn btn-secondary">
-                <input type="radio" onClick={() => setAnswer(false)}
+                <input type="radio" onClick={() => {
+                    setAnswer(false)
+                    question.answer = "false"
+                }}
                 name={question._id}/>
                 False
             </label>

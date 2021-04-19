@@ -15,9 +15,6 @@ const QuizzesList = () => {
             })
     }, [])
 
-    // useEffect(() => {
-    //     findAllQuizzes()
-    // }, [])
 
     console.log(quizzes)
 
